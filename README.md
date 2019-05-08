@@ -8,5 +8,5 @@
 开发IDE为eclipse oxygen 3,
 	开发软件库版本 jdk1.8.0
   
-  UML2RDFS文件夹是工程文件，其中包含了一个powerdesigner
+  UML2RDFS的工程文件，其中包含了一个powerdesigner
 	生成的测试用例，名字为UML Class Diagram_university.oom
