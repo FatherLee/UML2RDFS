@@ -168,17 +168,19 @@ public class JdomPrase {
 				List<Attribt> eAttr=new ArrayList<Attribt>();
 				Element attr=li.get(i).getChild("Attributes", Namespace.getNamespace("c", "collection"));
 				Clas temp = new Clas();
-				Attribt tep=new Attribt();
+				
 				List<Element> attrList=new ArrayList<Element>();
 				
 				if(attr!=null) {
 					attrList=attr.getChildren();
 					for(int n=0;n<attrList.size();n++) {
-						
+						Attribt tep=new Attribt();
 						tep.setId(attrList.get(n).getAttributeValue("Id"));
 						tep.setName(attrList.get(n).getChildText("Name", Namespace.getNamespace("a", "attribute")));
 						tep.setDataType(attrList.get(n).getChildText("DataType", Namespace.getNamespace("a", "attribute")));
+						//System.out.println("n:"+n+tep.getName());
 						eAttr.add(tep);
+						
 					}
 				}
 				else {
@@ -204,6 +206,11 @@ public class JdomPrase {
 			
 			changeAttrName(eClass);
 			
+			/*for(int i=0;i<eClass.size();i++) {
+				for(int j=0;j<eClass.get(i).getAttr().size();j++) {
+					System.out.println(eClass.get(i).getName()+":"+eClass.get(i).getAttr().get(j).getName());
+				}
+			}*/
 			jta.setText(stri);
 			
 			break;
@@ -212,8 +219,9 @@ public class JdomPrase {
 			
 			//存储关联类
 			li=eAssociations.getChildren();
-			Association tempA=new Association();
+			
 			for(int i=0;i<li.size();i++) {
+				Association tempA=new Association();
 				
 				Element obj1=li.get(i).getChild("Object1", Namespace.getNamespace("c", "collection"));
 				Element obj2=li.get(i).getChild("Object2", Namespace.getNamespace("c", "collection"));
@@ -257,6 +265,7 @@ public class JdomPrase {
 					
 					}
 				}
+			
 			jta.setText(stri);
 			
 			break;
@@ -267,8 +276,9 @@ public class JdomPrase {
 			//juhe聚合类
 			li=eAssociations.getChildren();
 			//System.out .println(li.size());
-			Aggregation tempAg=new Aggregation();
+			
 			for(int n=0;n<li.size();n++) {
+				Aggregation tempAg=new Aggregation();
 				if(li.get(n).getChildText("RoleAIndicator", Namespace.getNamespace("a", "attribute"))!=null) {
 					//ju聚合
 					Element obj1=li.get(n).getChild("Object1", Namespace.getNamespace("c", "collection"));
@@ -278,9 +288,10 @@ public class JdomPrase {
 					
 					tempAg.setId(li.get(n).getAttributeValue("Id"));
 					tempAg.setName(li.get(n).getChildText("Name", Namespace.getNamespace("a", "attribute")));
-					tempAg.setObj1AggreById(obj1.getAttributeValue(objc1.getAttributeValue("Ref")));
-					tempAg.setObj2AggreId(obj2.getAttributeValue(objc2.getAttributeValue("Ref")));
-					
+					tempAg.setObj1AggreById(objc1.getAttributeValue("Ref"));
+					tempAg.setObj2AggreId(objc2.getAttributeValue("Ref"));
+					tempAg.setObj1AggreByName(findClass(tempAg.getObj1AggreById()));
+					tempAg.setObj2AggreName(findClass(tempAg.getObj2AggreId()));
 					//stri=stri+li.get(i).getChildText("Name", Namespace.getNamespace("a", "attribute"))+":"+findClass(objc1.getAttributeValue("Ref"))+"——<>"+findClass(objc2.getAttributeValue("Ref"))+"\r\n";
 					eAggregation.add(tempAg);
 					}
@@ -290,10 +301,9 @@ public class JdomPrase {
 			//泛化类
 			li=eGeneralizations.getChildren();
 			//System.out .println(li.size());
-			Generalization tempGe=new Generalization();
+			
 			for(int n=0;n<li.size();n++) {
-				
-				
+					Generalization tempGe=new Generalization();
 					Element obj1=li.get(n).getChild("Object1", Namespace.getNamespace("c", "collection"));
 					Element obj2=li.get(n).getChild("Object2", Namespace.getNamespace("c", "collection"));
 					Element objc1=obj1.getChild("Class", Namespace.getNamespace("o", "object"));
@@ -314,9 +324,9 @@ public class JdomPrase {
 			//yi依赖类
 			li=eDependencies.getChildren();
 			//System.out .println(li.size());
-			Dependency tempDe=new Dependency();
+			
 			for(int n=0;n<li.size();n++) {
-				
+					Dependency tempDe=new Dependency();
 				
 					Element obj1=li.get(n).getChild("Object1", Namespace.getNamespace("c", "collection"));
 					Element obj2=li.get(n).getChild("Object2", Namespace.getNamespace("c", "collection"));

@@ -15,27 +15,29 @@ public class Construct {
 		
 		boolean isgen=false;//shi是否是某一泛化关系的子类
 		for(int i=0;i<clas.size();i++) {
-			System.out.println(i+":"+clas.size());
-			str=str+"<rdfs:Class rdf:ID=“"+clas.get(i).getName()+"”/>\r\n";
+			//System.out.println(i+":"+clas.size());
+			System.out.println(clas.get(i).getId()+":"+clas.get(i).getName());
 			for(int n=0;n<gen.size();n++) {
 				if(clas.get(i).getId().equals(gen.get(n).getCid())) {
 					//ru如果该类是泛化的子类，就先不构造其属性语句，在泛化中构造
 					isgen=true;
 					break;
 				}
+				else
+					isgen=false;
 			}
-			if(!isgen&&clas.get(i).getAttr()!=null) {
-				System.out.println("li:"+clas.size());
-				System.out.println("liattr:"+clas.get(i).getAttr().size());
-				
-				for(int j=0;j<clas.get(i).getAttr().size();j++) {
-					System.out.println(i+"-"+j);
-					str=str+"<rdf:Property rdf:ID=“"+clas.get(i).getAttr().get(j).getName()+"”>\r\n";
-					str=str+"\t";
-					str=str+"<rdfs:domain rdf:resource=“#"+clas.get(i).getName()+"”/>\r\n";
-					str=str+"\t";
-					str=str+"<rdfs:range rdf:resource=“&xsd:"+clas.get(i).getAttr().get(j).getDataType()+"”/>\r\n";
-					str=str+"</rdf:Property>"+"\r\n";
+			if(!isgen) {
+				str=str+"<rdfs:Class rdf:ID=“"+clas.get(i).getName()+"”/>\r\n";
+				if(clas.get(i).getAttr()!=null) {
+					for(int j=0;j<clas.get(i).getAttr().size();j++) {
+						//System.out.println(i+"-"+j);
+						str=str+"<rdf:Property rdf:ID=“"+clas.get(i).getAttr().get(j).getName()+"”>\r\n";
+						str=str+"\t";
+						str=str+"<rdfs:domain rdf:resource=“#"+clas.get(i).getName()+"”/>\r\n";
+						str=str+"\t";
+						str=str+"<rdfs:range rdf:resource=“&xsd:"+clas.get(i).getAttr().get(j).getDataType()+"”/>\r\n";
+						str=str+"</rdf:Property>"+"\r\n";
+					}
 				}
 			}
 				
@@ -74,9 +76,9 @@ public class Construct {
 			
 			str=str+"<rdf:Property rdf:ID=“"+aggre.get(i).getName()+"”>\r\n";
 			str=str+"\t";
-			str=str+"<rdfs:domain rdf:resource=“#"+aggre.get(i).getObj2AggreId()+"”/>\r\n";
+			str=str+"<rdfs:domain rdf:resource=“#"+aggre.get(i).getObj2AggreName()+"”/>\r\n";
 			str=str+"\t";
-			str=str+"<rdfs:range rdf:resource=“#"+aggre.get(i).getObj1AggreById()+"”/>\r\n";
+			str=str+"<rdfs:range rdf:resource=“#"+aggre.get(i).getObj1AggreByName()+"”/>\r\n";
 			str=str+"</rdf:Property>"+"\r\n";
 		}
 		

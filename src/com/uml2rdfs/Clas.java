@@ -107,6 +107,9 @@ class Aggregation extends Attrib{
 	//ju聚合
 	private String obj1AggreById;//聚合的分体id
 	private String obj2AggreId;//聚合的总体id
+	private String obj1AggreByName;//聚合的分体ming名字
+	private String obj2AggreName;//聚合的总体名字
+
 	public String getObj1AggreById() {
 		return obj1AggreById;
 	}
@@ -118,6 +121,18 @@ class Aggregation extends Attrib{
 	}
 	public void setObj2AggreId(String obj2AggreId) {
 		this.obj2AggreId = obj2AggreId;
+	}
+	public String getObj1AggreByName() {
+		return obj1AggreByName;
+	}
+	public void setObj1AggreByName(String obj1AggreByName) {
+		this.obj1AggreByName = obj1AggreByName;
+	}
+	public String getObj2AggreName() {
+		return obj2AggreName;
+	}
+	public void setObj2AggreName(String obj2AggreName) {
+		this.obj2AggreName = obj2AggreName;
 	}
 	
 	

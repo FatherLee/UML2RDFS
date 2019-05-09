@@ -342,16 +342,16 @@ public class MainFrame {
 				jp.show(jtaAC);
 				jp.show(jtaRS);
 				
-			System.out.println("解析成功");
-			System.out.println(storeC);System.out.println(storeAC);System.out.println(storeRS);
+			//System.out.println("解析成功");
+			//System.out.println(storeC);System.out.println(storeAC);System.out.println(storeRS);
 				jp.show(jtaAttr, storeC);
 				jp.show(jtaRoles, storeAC);
 				jp.show(jtaConstraints,storeAC);
 				jp.show(jtaRSC, storeRS);		
 				
-				System.out.println(jp.eClass.size());
+				//System.out.println(jp.eClass.size());
 				temp.copy(jp);
-				System.out.println(temp.eClass.size());
+			
 			}
 			else if(e.getSource()==jbConstruct) {
 				
