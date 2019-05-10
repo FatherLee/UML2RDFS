@@ -10,6 +10,10 @@ public class Construct {
 	
 	private String str="";//gou构造的语句存入字符串
 	
+	public Construct() {
+		str=str+"<rdf:RDF>\r\n";
+	}
+	
 	public  void constrClass(List<Clas> clas,List<Generalization> gen){
 		//g构造类的rdf语句
 		
@@ -135,6 +139,13 @@ public class Construct {
 
 	public String getStr() {
 		return str;
+	}
+
+	public void constructe() {
+		// TODO Auto-generated method stub
+		
+			str=str+"</rdf:RDF>\r\n";
+		
 	}
 
 	

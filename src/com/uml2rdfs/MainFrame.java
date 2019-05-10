@@ -366,6 +366,8 @@ public class MainFrame {
 				
 				con.ConstrDep(temp.eDependency,temp.eClass);
 				
+				con.constructe();
+				
 				jtaRDFS.setText(con.getStr());
 			}
 			else if(e.getSource()==jbSaveAs) {
